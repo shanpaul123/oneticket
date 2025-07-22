@@ -1,103 +1,164 @@
-import Image from "next/image";
+// app/page.tsx
+'use client';
 
-export default function Home() {
+import React, { useState, useEffect } from 'react';
+import Head from 'next/head';
+import Layout from './components/Layout';
+import FormSection from './components/FormSection';
+import TableSection from './components/TableSection';
+import { InventoryItem } from './type/index';
+
+export default function AddInventoryPage() {
+  const [inventory, setInventory] = useState<InventoryItem[]>([]);
+  const [editingItem, setEditingItem] = useState<InventoryItem | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchInventory = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        await new Promise((resolve) => setTimeout(resolve, 800));
+        const mockData: InventoryItem[] = [
+          {
+            id: 'item-1700000000-abc',
+            ticketType: 'E-ticket',
+            quantity: 2,
+            splitType: 'Split Evenly',
+            seatingArrangement: 'Seated Together',
+            maxDisplayQuantity: 2,
+            fanArea: 'Home',
+            category: 'Home Fans Section',
+            sectionBlock: 'Longside Lower Tier Central',
+            row: 'A',
+            firstSeat: 10,
+            faceValue: 120.0,
+            payoutPrice: 110.0,
+            restrictions: 'None',
+            dateToShip: new Date('2024-10-25'),
+            ticketsInHand: true,
+            uploadedTickets: false,
+          },
+          {
+            id: 'item-1700000001-def',
+            ticketType: 'Local Delivery',
+            quantity: 4,
+            splitType: 'None',
+            seatingArrangement: 'Not Seated Together',
+            maxDisplayQuantity: 4,
+            fanArea: 'Away',
+            category: 'Away Fans Section',
+            sectionBlock: 'Shortside Upper Tier',
+            row: 'B',
+            firstSeat: 1,
+            faceValue: 80.0,
+            payoutPrice: 70.0,
+            restrictions: 'Age Restricted',
+            dateToShip: new Date('2024-11-15'),
+            ticketsInHand: false,
+            uploadedTickets: true,
+          },
+        ];
+        setInventory(mockData);
+      } catch (err: any) {
+        setError(err.message || 'Failed to fetch inventory.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInventory();
+  }, []);
+
+  const handleAddListing = async (newItem: InventoryItem) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      if (editingItem) {
+        // Update mode
+        setInventory((prevInventory) =>
+          prevInventory.map((item) =>
+            item.id === editingItem.id ? { ...newItem, id: editingItem.id } : item
+          )
+        );
+        setEditingItem(null); // Clear edit mode
+      } else {
+        // Add new
+        setInventory((prevInventory) => [...prevInventory, newItem]);
+      }
+    } catch (err: any) {
+      setError(err.message || 'Failed to add/update listing.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleUpdateInventory = async (updatedInventory: InventoryItem[]) => {
+    setLoading(true);
+    setError(null);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      setInventory(updatedInventory);
+    } catch (err: any) {
+      setError(err.message || 'Failed to update inventory.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEditItem = (item: InventoryItem) => {
+    setEditingItem(item);
+  };
+
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <Layout>
+      <h1 className="text-2xl font-bold mb-6">Add Inventory</h1>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
+  <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 flex-wrap">
+    <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2">
+    <select
+  className="w-full sm:w-auto text-base sm:text-lg font-semibold border border-gray-300 rounded-md px-2 py-1 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  defaultValue="chelsea-vs-arsenal"
+>
+  <option value="chelsea-vs-arsenal">Chelsea vs Arsenal - Premier League</option>
+  <option value="manutd-vs-liverpool">Man Utd vs Liverpool - FA Cup</option>
+  <option value="city-vs-chelsea">Man City vs Chelsea - Champions League</option>
+</select>
+
+      <span className="text-gray-600 hidden sm:inline">|</span>
+      <span className="text-gray-600">Sun, 10 Nov 2024</span>
+      <span className="text-gray-600">16:30</span>
+      <span className="text-gray-600">Stamford Bridge, London, United Kingdom</span>
     </div>
+
+    <a
+      href="https://www.google.com/maps/search/?api=1&query=Stamford+Bridge,+London,+United+Kingdom"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 text-sm sm:text-base"
+    >
+      View Map
+    </a>
+  </div>
+</div>
+
+
+      <FormSection
+        onAddListing={handleAddListing}
+        editingItem={editingItem}
+      />
+
+      <TableSection
+        inventory={inventory}
+        onUpdateInventory={handleUpdateInventory}
+        onEditItem={handleEditItem}
+        isLoading={loading}
+        error={error}
+      />
+    </Layout>
   );
 }

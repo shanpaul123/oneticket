@@ -44,8 +44,10 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   }, [editingItem]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value, type, checked } = e.target;
-    const val = type === 'checkbox' ? checked : value;
+    const target = e.target as HTMLInputElement | HTMLSelectElement;
+const { name, value, type } = target;
+const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
+
 
     setFormData((prev) => ({
       ...prev,

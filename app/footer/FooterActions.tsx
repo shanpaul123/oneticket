@@ -74,7 +74,7 @@ const FooterActions: React.FC<FooterActionsProps> = ({
           Cancel
         </button>
         <button className="px-4 py-1.5 text-sm text-white bg-green-600 rounded hover:bg-green-700">
-          Live
+          Publish Live
         </button>
       </div>
     </div>

@@ -116,7 +116,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Quantity */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">
+          <label className="text-sm font-light text-gray-500 mb-1 block">
             Quantity <span className="text-red-500">*</span>
           </label>
           <input
@@ -131,7 +131,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Split Type */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Split Type</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Split Type</label>
           <input
             type="text"
             name="splitType"
@@ -143,7 +143,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Seating Arrangement */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Seating Arrangement</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Seating Arrangement</label>
           <input
             type="text"
             name="seatingArrangement"
@@ -155,7 +155,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Max Display Quantity */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Max Display Quantity</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Max Display Quantity</label>
           <input
             type="number"
             name="maxDisplayQuantity"
@@ -167,7 +167,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Fan Area */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Fan Area</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Fan Area</label>
           <input
             type="text"
             name="fanArea"
@@ -179,7 +179,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Category */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Category</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Category</label>
           <input
             type="text"
             name="category"
@@ -191,7 +191,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Section Block */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Section Block</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Section Block</label>
           <input
             type="text"
             name="sectionBlock"
@@ -203,7 +203,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Row */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Row</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Row</label>
           <input
             type="text"
             name="row"
@@ -215,7 +215,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* First Seat */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">First Seat</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">First Seat</label>
           <input
             type="number"
             name="firstSeat"
@@ -227,7 +227,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Face Value */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Face Value</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Face Value</label>
           <input
             type="number"
             name="faceValue"
@@ -240,7 +240,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Payout Price */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">
+          <label className="text-sm font-light text-gray-500 mb-1 block">
             Payout Price <span className="text-red-500">*</span>
           </label>
           <input
@@ -256,7 +256,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Restrictions */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Restrictions</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Restrictions</label>
           <input
             type="text"
             name="restrictions"
@@ -268,7 +268,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   
         {/* Date to Ship */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Date to Ship</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Date to Ship</label>
           <input
             type="date"
             name="dateToShip"
@@ -292,18 +292,18 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             onChange={handleChange}
             className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
-          <label className="text-sm font-medium text-gray-500">Tickets in Hand</label>
+          <label className="text-sm font-light text-gray-500">Tickets in Hand</label>
         </div>
   
         {/* Upload Tickets */}
         <div>
-          <label className="text-sm font-medium text-gray-500 mb-1 block">Upload Tickets</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Upload Tickets</label>
           <input
             type="file"
             name="uploadedTickets"
             accept=".pdf,.jpg,.jpeg,.png"
             onChange={handleFileUpload}
-            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium"
+            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-light"
           />
           {uploadedFile && (
             <p className="text-xs text-gray-500 mt-1">Selected: {uploadedFile.name}</p>
@@ -314,7 +314,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
       <div className="mt-6 flex justify-start">
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-md transition"
+          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-light px-5 py-2.5 rounded-md transition"
         >
           {editingItem ? 'Update Listing' : 'Add Listing'}
         </button>

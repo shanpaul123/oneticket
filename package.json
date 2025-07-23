@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@fontsource/inter": "^5.2.6",
+    "@fontsource/poppins": "^5.2.6",
     "@heroicons/react": "^2.2.0",
+    "geist": "^1.4.2",
     "next": "15.4.2",
     "react": "19.1.0",
     "react-datepicker": "^8.4.0",

@@ -14,6 +14,17 @@
     --foreground: #ededed;
   }
 }
+@layer base {
+  input,
+  select,
+  textarea {
+    @apply font-medium text-gray-800;
+  }
+}
+::placeholder {
+  @apply text-gray-500 font-normal;
+}
+
 
 body {
   @apply font-sans;

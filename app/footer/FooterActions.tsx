@@ -1,4 +1,6 @@
 'use client'
+
+import React from 'react'
 import {
   FiCheckSquare,
   FiXSquare,
@@ -8,22 +10,29 @@ import {
 } from 'react-icons/fi'
 
 type FooterActionsProps = {
-  selectedRows: number[]
-  onEdit: (id: number) => void
-  onClone: (id: number) => void
+  selectedRows?: string[]
+  onEdit: (id: string) => void
+  onClone: (id: string) => void
   onDeleteSelected: () => void
   onDeselectAll: () => void
 }
 
-export default function FooterActions({
-  selectedRows,
+const FooterActions: React.FC<FooterActionsProps> = ({
+  selectedRows = [],
   onEdit,
   onClone,
   onDeleteSelected,
   onDeselectAll,
-}: FooterActionsProps) {
- if (!selectedRows || selectedRows.length === 0) return null
+}) => {
+  console.log('🚨 FooterActions rendered') // debug
 
+  const handleEdit = React.useCallback(() => {
+    selectedRows.forEach((id) => onEdit(id))
+  }, [selectedRows, onEdit])
+
+  const handleClone = React.useCallback(() => {
+    selectedRows.forEach((id) => onClone(id))
+  }, [selectedRows, onClone])
 
   return (
     <div className="flex justify-between items-center px-4 py-3 mt-4 border-t bg-white shadow-sm rounded">
@@ -33,9 +42,7 @@ export default function FooterActions({
         </span>
 
         <button
-          onClick={() => {
-            selectedRows.forEach((id) => onEdit(id))
-          }}
+          onClick={handleEdit}
           className="flex items-center gap-1 text-sm px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100"
         >
           <FiEdit className="text-blue-600" />
@@ -43,9 +50,7 @@ export default function FooterActions({
         </button>
 
         <button
-          onClick={() => {
-            selectedRows.forEach((id) => onClone(id))
-          }}
+          onClick={handleClone}
           className="flex items-center gap-1 text-sm px-3 py-1.5 border border-gray-300 rounded hover:bg-gray-100"
         >
           <FiCopy className="text-blue-600" />
@@ -75,3 +80,6 @@ export default function FooterActions({
     </div>
   )
 }
+
+// ✅ Only re-renders if props actually change
+export default React.memo(FooterActions)

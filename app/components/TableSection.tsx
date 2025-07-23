@@ -1,14 +1,16 @@
 'use client'
 
-import React, { useState } from 'react'
-import { FaHandPaper, FaArrowsAltV } from 'react-icons/fa'
-import TableRow from './TableRow'
-import FooterActions from '../footer/FooterActions'
+import React, { useState, useCallback } from 'react'
 import { InventoryItem } from '../types'
-import { HandRaisedIcon as HandRaisedOutline } from '@heroicons/react/24/outline';
-import { HandRaisedIcon as HandRaisedSolid } from '@heroicons/react/24/solid';
-import { ArrowDownTrayIcon as ArrowDownOutline } from "@heroicons/react/24/outline";
-import { CalendarDaysIcon, ClockIcon, MapPinIcon, HandRaisedIcon, ArrowDownTrayIcon } from '@heroicons/react/24/outline';
+import FooterActions from '../footer/FooterActions'
+import {
+  CalendarDaysIcon,
+  ClockIcon,
+  MapPinIcon,
+  HandRaisedIcon as HandRaisedOutline,
+  ArrowDownTrayIcon as ArrowDownOutline,
+} from '@heroicons/react/24/outline'
+import { HandRaisedIcon as HandRaisedSolid } from '@heroicons/react/24/solid'
 
 interface TableSectionProps {
   inventory: InventoryItem[]
@@ -17,7 +19,6 @@ interface TableSectionProps {
   isLoading: boolean
   error: string | null
 }
-
 const TableSection: React.FC<TableSectionProps> = ({
   inventory,
   onUpdateInventory,
@@ -27,229 +28,198 @@ const TableSection: React.FC<TableSectionProps> = ({
 }) => {
   const [selectedRows, setSelectedRows] = useState<string[]>([])
 
-  const handleToggleSelect = (id: string) => {
+  const handleToggleSelect = useCallback((id: string) => {
     setSelectedRows((prevSelected) =>
       prevSelected.includes(id)
         ? prevSelected.filter((rowId) => rowId !== id)
         : [...prevSelected, id]
     )
-  }
+  }, [])
 
-  const handleSelectAll = () => {
-    if (selectedRows.length === inventory.length && inventory.length > 0) {
-      setSelectedRows([])
-    } else {
-      setSelectedRows(inventory.map((item) => item.id))
-    }
-  }
+  const handleSelectAll = useCallback(() => {
+    setSelectedRows((prevSelected) => {
+      if (prevSelected.length === inventory.length && inventory.length > 0) {
+        return []
+      } else {
+        return inventory.map((item) => item.id)
+      }
+    })
+  }, [inventory])
 
-  const handleDeselectAll = () => setSelectedRows([])
+  const handleDeselectAll = useCallback(() => {
+    setSelectedRows([])
+  }, [])
 
-  const handleDeleteSelected = async () => {
-    if (
-      confirm(`Are you sure you want to delete ${selectedRows.length} selected items?`)
-    ) {
+  const handleDeleteSelected = useCallback(async () => {
+    if (confirm(`Are you sure you want to delete ${selectedRows.length} selected items?`)) {
       await new Promise((resolve) => setTimeout(resolve, 300))
-      const updatedInventory = inventory.filter(
-        (item) => !selectedRows.includes(item.id)
-      )
+      const updatedInventory = inventory.filter((item) => !selectedRows.includes(item.id))
       onUpdateInventory(updatedInventory)
       setSelectedRows([])
     }
-  }
+  }, [selectedRows, inventory, onUpdateInventory])
 
-  const handleEdit = (id: string) => {
-        console.log('Edit triggered with ID:', id)
+  const handleEdit = useCallback(
+    (id: string) => {
+      const itemToEdit = inventory.find((item) => item.id === id)
+      if (itemToEdit) onEditItem(itemToEdit)
+    },
+    [inventory, onEditItem]
+  )
 
-    const itemToEdit = inventory.find((item) => item.id === id)
-    if (itemToEdit) onEditItem(itemToEdit)
-  }
-
-  const handleDelete = async (id: string) => {
-    if (confirm('Are you sure you want to delete this item?')) {
+  const handleClone = useCallback(
+    async (id: string) => {
+      const itemToClone = inventory.find((item) => item.id === id)
+      if (!itemToClone) return
       await new Promise((resolve) => setTimeout(resolve, 300))
-      const updatedInventory = inventory.filter((item) => item.id !== id)
-      onUpdateInventory(updatedInventory)
-    }
-  }
-
-  const handleClone = async (itemToClone: InventoryItem) => {
-    await new Promise((resolve) => setTimeout(resolve, 300))
-    const clonedItem: InventoryItem = {
-      ...itemToClone,
-      id: `item-${Date.now()}-cloned-${Math.random().toString(36).substring(2, 5)}`,
-      uploadedTickets: false,
-    }
-    onUpdateInventory([...inventory, clonedItem])
-  }
+      const clonedItem: InventoryItem = {
+        ...itemToClone,
+        id: `item-${Date.now()}-cloned-${Math.random().toString(36).substring(2, 5)}`,
+        uploadedTickets: false,
+      }
+      onUpdateInventory([...inventory, clonedItem])
+    },
+    [inventory, onUpdateInventory]
+  )
 
   return (
-    <div className="overflow-x-auto">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex space-x-2">
+    <div className="flex flex-col min-h-screen bg-gray-50">
+      {/* Main scrollable content */}
+      <div className="flex-1 overflow-auto p-4">
+        {/* Action Buttons */}
+        <div className="flex flex-wrap gap-2 mb-4 text-sm text-gray-700 font-medium">
           <button
             onClick={handleSelectAll}
-            className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+            className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-600"
           >
             Select All
           </button>
           <button
             onClick={handleDeselectAll}
-            className="px-3 py-1 border border-gray-300 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-blue-600"
+            className="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-100 hover:text-blue-600"
           >
             Deselect All
           </button>
           <button
             onClick={handleDeleteSelected}
             disabled={selectedRows.length === 0 || isLoading}
-            className={`px-3 py-1 border border-gray-300 rounded-md text-sm font-medium ${
+            className={`px-3 py-1 border rounded-md ${
               selectedRows.length === 0 || isLoading
-                ? 'text-gray-500 bg-gray-50 cursor-not-allowed'
-                : 'text-red-600 hover:bg-red-50'
+                ? 'text-gray-400 bg-gray-100 cursor-not-allowed'
+                : 'text-red-600 border-gray-300 hover:bg-red-50'
             }`}
           >
             Delete ({selectedRows.length})
           </button>
         </div>
-      </div>
 
+        {/* Event Info Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-4 bg-[#230B6F] text-white text-sm font-medium rounded-md px-4 py-3 mb-4">
+          <div className="flex flex-wrap items-center gap-6">
+            <div className="flex items-center gap-2">
+              <span className="w-3 h-3 rounded-full border-2 border-white flex items-center justify-center">
+                <span className="w-2 h-2 rounded-full bg-white" />
+              </span>
+              <span>Chelsea vs Arsenal - Premier League</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CalendarDaysIcon className="h-4 w-4" />
+              <span>Sun, 10 Nov 2024</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <ClockIcon className="h-4 w-4" />
+              <span>16:30</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <MapPinIcon className="h-4 w-4" />
+              <span>Stamford Bridge, London</span>
+            </div>
+          </div>
+        </div>
 
-      {isLoading && <p className="text-center text-blue-600">Loading inventory...</p>}
-      {error && <p className="text-center text-red-600">Error: {error}</p>}
-      <div className="flex items-center justify-between bg-[#230B6F] text-white text-sm font-medium rounded-md px-4 py-2 w-full">
-  <div className="flex items-center space-x-6 flex-wrap">
-    <div className="flex items-center space-x-2">
-      <span className="w-3 h-3 rounded-full border-2 border-white flex items-center justify-center">
-        <span className="w-2 h-2 rounded-full bg-white" />
-      </span>
-      <span>Chelsea vs Arsenal - Premier League</span>
-    </div>
-
-    <div className="flex items-center space-x-2">
-      <CalendarDaysIcon className="h-4 w-4 text-white" />
-      <span>Sun, 10 Nov 2024</span>
-    </div>
-
-    <div className="flex items-center space-x-2">
-      <ClockIcon className="h-4 w-4 text-white" />
-      <span>16:30</span>
-    </div>
-
-    <div className="flex items-center space-x-2">
-      <MapPinIcon className="h-4 w-4 text-white" />
-      <span>Stamford Bridge, London, United Kingdom</span>
-    </div>
-  </div>
-
-</div>
-      {!isLoading && !error && (
-        <div className="w-full overflow-x-auto">
-
-        <table className="min-w-[1200px] border border-gray-200 text-[13px] font-[Inter] text-gray-700">
-          <thead className="bg-[#F7F8FC] text-gray-500 text-xs font-medium uppercase">
-            <tr>
-              <th className="px-2 py-3 border border-gray-200 text-left">
-                <input
-                  type="checkbox"
-                  className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                  checked={selectedRows.length === inventory.length && inventory.length > 0}
-                  onChange={handleSelectAll}
-                />
-              </th>
-              {[
-                'Ticket Type', 'Quantity', 'Split Type', 'Max Display Quantity',
-                'Category', 'Section/Block', 'Row', 'First Seat',
-                'Face Value', 'Payout Price', 'Seating', 'Actions'
-              ].map((label, idx) => (
-                <th
-                  key={idx}
-                  className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap"
-                >
-                  {label}
-                </th>
-              ))}
-            </tr>
-          </thead>
-
-          <tbody className="divide-y divide-gray-100 bg-white text-[13px] font-[Inter]">
-            {inventory.length > 0 ? (
-              inventory.map((item) => (
-                <tr key={item.id} className="hover:bg-gray-50">
-                  <td className="px-2 py-2 border border-gray-200">
+        {/* Inventory Table */}
+        {!isLoading && !error && (
+          <div className="w-full overflow-x-auto">
+            <table className="min-w-[1200px] border border-gray-200 text-[13px] font-[Inter] text-gray-700">
+              <thead className="bg-[#F7F8FC] text-gray-500 text-xs font-medium uppercase">
+                <tr>
+                  <th className="px-2 py-3 border border-gray-200 text-left">
                     <input
                       type="checkbox"
                       className="h-4 w-4 text-blue-600 border-gray-300 rounded"
-                      checked={selectedRows.includes(item.id)}
-                      onChange={() => handleToggleSelect(item.id)}
+                      checked={selectedRows.length === inventory.length && inventory.length > 0}
+                      onChange={handleSelectAll}
                     />
-                  </td>
-
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.ticketType}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.quantity}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.splitType}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.maxDisplayQty}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.category}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.sectionBlock}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.row}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.firstSeat}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.faceValue}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.payoutPrice}</div></td>
-                  <td className="px-2 py-2 border border-gray-200"><div className="border border-gray-300 rounded px-2 py-1">{item.seating}</div></td>
-                  <td className="px-2 py-2 border border-gray-200 text-gray-400">
-  <div className="flex items-center gap-2">
-    {/* Hand Icon Box */}
-    <div className="flex items-center justify-center w-10 h-10 rounded-md border border-[#E5E5E5] bg-white shadow-sm">
-      {item.ticketsInHand ? (
-        <HandRaisedSolid className="h-5 w-5 text-[#20BD8E]" />
-      ) : (
-        <HandRaisedOutline className="h-5 w-5 text-[#384072]" />
-      )}
-    </div>
-
-    {/* Download Icon Box */}
-    <div className="flex items-center justify-center w-10 h-10 rounded-md border border-[#E5E5E5] bg-white shadow-sm">
-      
-        <ArrowDownOutline className="h-5 w-5 text-[#384072]" />
-      </div>
-  </div>
-</td>
-
-
-                  {/* <td className="px-2 py-2 border border-gray-200">
-                    <div className="flex space-x-2">
-                      <button onClick={() => handleEdit(item.id)} className="text-blue-600 hover:underline text-xs">Edit</button>
-                      <button onClick={() => handleClone(item)} className="text-green-600 hover:underline text-xs">Clone</button>
-                      <button onClick={() => handleDelete(item.id)} className="text-red-600 hover:underline text-xs">Delete</button>
-                    </div>
-                  </td> */}
+                  </th>
+                  {[
+                    'Ticket Type', 'Quantity', 'Split Type', 'Max Display Quantity',
+                    'Category', 'Section/Block', 'Row', 'First Seat',
+                    'Face Value', 'Payout Price', 'Seating', 'Actions'
+                  ].map((label, idx) => (
+                    <th key={idx} className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap">
+                      {label}
+                    </th>
+                  ))}
                 </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={15} className="px-4 py-8 text-center text-gray-500">
-                  No inventory items added yet.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-        </div>
-      )}
+              </thead>
 
-<FooterActions
-  selectedRows={selectedRows}
-  onEdit={handleEdit}
-  onClone={(id) => {
-    const item = inventory.find((item) => item.id === id)
-    if (item) handleClone(item)
-  }}
-  onDeleteSelected={handleDeleteSelected}
-  onDeselectAll={handleDeselectAll}
-/>
+              <tbody className="divide-y divide-gray-100 bg-white">
+                {inventory.length > 0 ? (
+                  inventory.map((item) => (
+                    <tr key={item.id} className="hover:bg-gray-50">
+                      <td className="px-2 py-2 border border-gray-200">
+                        <input
+                          type="checkbox"
+                          className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                          checked={selectedRows.includes(item.id)}
+                          onChange={() => handleToggleSelect(item.id)}
+                        />
+                      </td>
+                      {[item.ticketType, item.quantity, item.splitType, item.maxDisplayQty, item.category, item.sectionBlock, item.row, item.firstSeat, item.faceValue, item.payoutPrice, item.seating].map((value, i) => (
+                        <td key={i} className="px-2 py-2 border border-gray-200">
+                          <div className="border border-gray-300 rounded px-2 py-1">{value}</div>
+                        </td>
+                      ))}
+                      <td className="px-2 py-2 border border-gray-200 text-gray-400">
+                        <div className="flex items-center gap-2">
+                          <div className="flex items-center justify-center w-10 h-10 rounded-md border border-[#E5E5E5] bg-white shadow-sm">
+                            {item.ticketsInHand ? (
+                              <HandRaisedSolid className="h-5 w-5 text-[#20BD8E]" />
+                            ) : (
+                              <HandRaisedOutline className="h-5 w-5 text-[#384072]" />
+                            )}
+                          </div>
+                          <div className="flex items-center justify-center w-10 h-10 rounded-md border border-[#E5E5E5] bg-white shadow-sm">
+                            <ArrowDownOutline className="h-5 w-5 text-[#384072]" />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={15} className="px-4 py-8 text-center text-gray-500">
+                      No inventory items added yet.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        )}
 
+        {isLoading && <p className="text-center text-blue-600">Loading inventory...</p>}
+        {error && <p className="text-center text-red-600">Error: {error}</p>}
+      </div>
 
-
-
+      {/* Sticky Footer */}
+      <FooterActions
+        selectedRows={selectedRows}
+        onEdit={handleEdit}
+        onClone={handleClone}
+        onDeleteSelected={handleDeleteSelected}
+        onDeselectAll={handleDeselectAll}
+      />
     </div>
   )
 }

@@ -6,7 +6,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Google Sans', ...defaultTheme.fontFamily.sans], // Inter first
+        sans: ['Roboto', ...defaultTheme.fontFamily.sans], // Inter first
       },
     },
   },

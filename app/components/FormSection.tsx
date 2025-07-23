@@ -282,33 +282,65 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
-        {/* Tickets in Hand */}
-        <div className="flex items-center space-x-2 mt-2">
-          <input
-            type="checkbox"
-            name="ticketsInHand"
-            checked={formData.ticketsInHand}
-            onChange={handleChange}
-            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-          />
-          <label className="text-sm font-light text-gray-500">Tickets in Hand</label>
-        </div>
-  
-        {/* Upload Tickets */}
-        <div>
-          <label className="text-sm font-light text-gray-500 mb-1 block">Upload Tickets</label>
-          <input
-            type="file"
-            name="uploadedTickets"
-            accept=".pdf,.jpg,.jpeg,.png"
-            onChange={handleFileUpload}
-            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-light"
-          />
-          {uploadedFile && (
-            <p className="text-xs text-gray-500 mt-1">Selected: {uploadedFile.name}</p>
-          )}
-        </div>
+  {/* Tickets in Hand */}
+<div>
+  <label className="text-sm font-light text-gray-500 mb-1 block">
+    Tickets in Hand
+  </label>
+  <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#1C1C1C] text-sm font-medium cursor-pointer shadow-sm">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-4 w-4 mr-2 text-[#4A3AFF]"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2l4 -4" />
+    </svg>
+    Tickets in Hand
+    <input
+      type="checkbox"
+      name="ticketsInHand"
+      checked={formData.ticketsInHand}
+      onChange={handleChange}
+      className="ml-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
+    />
+  </label>
+</div>
+
+{/* Upload Tickets */}
+<div>
+  <label className="text-sm font-light text-gray-500 mb-1 block">
+    Upload Tickets
+  </label>
+  <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#A2A2A2] text-sm font-medium cursor-pointer shadow-sm">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      className="h-4 w-4 mr-2 text-[#A2A2A2]"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0l-4 4m4-4l4 4"
+      />
+    </svg>
+    Upload Tickets
+    <input
+      type="file"
+      name="uploadedTickets"
+      accept=".pdf,.jpg,.jpeg,.png"
+      onChange={handleFileUpload}
+      className="hidden"
+    />
+  </label>
+</div>
+
+
+        
       </div>
   
       <div className="mt-6 flex justify-start">

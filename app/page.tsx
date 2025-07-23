@@ -117,7 +117,7 @@ export default function AddInventoryPage() {
   return (
     <Layout>
 <div className="flex justify-between items-center mb-6">
-  <h1 className="text-2xl font-bold">Add Inventory</h1>
+<h1 className="text-[22px] md:text-[24px] font-semibold text-gray-900 mb-4">Add Inventory</h1>
 
   <div className="flex items-center gap-4">
     <button onClick={() => alert("Requesting event...")} className="border border-blue-600 text-blue-600 px-4 py-1.5 rounded-md text-sm font-medium hover:bg-blue-50 transition">
@@ -182,7 +182,7 @@ export default function AddInventoryPage() {
 
       {/* Location */}
       <div className="flex items-center gap-1 text-gray-600">
-        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 40 40">
           <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 10-5.656 5.656l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z" />
         </svg>
         <span>Stamford Bridge, London, United Kingdom</span>
@@ -196,7 +196,7 @@ export default function AddInventoryPage() {
       rel="noopener noreferrer"
       className="inline-flex items-center gap-1 px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 text-sm font-medium transition"
     >
-      <svg className="h-4 w-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+      <svg className="h-4 w-4 text-blue-500" fill="none">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 10-5.656 5.656l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z" />
       </svg>
       View Map

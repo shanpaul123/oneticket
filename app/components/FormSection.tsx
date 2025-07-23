@@ -95,7 +95,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
       onSubmit={handleSubmit}
       className="bg-white px-6 py-5 rounded-xl border border-[#e5e7eb] shadow-sm mb-6"
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
         {/* Ticket Type */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block tracking-wide">

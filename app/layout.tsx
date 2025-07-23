@@ -18,7 +18,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Sidebar />
 
           {/* Main content scrollable */}
-          <main className="flex-1 overflow-auto p-4 bg-gray-50">
+          <main className="flex-1 overflow-auto bg-gray-50">
             {children}
           </main>
         </div>

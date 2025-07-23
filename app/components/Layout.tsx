@@ -7,10 +7,8 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="min-h-screen bg-gray-100 p-4 md:p-8">
-      <div className="max-w-7xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <div className="min-h-screen bg-white flex flex-col">
         {children}
-      </div>
     </div>
   );
 };

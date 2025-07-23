@@ -142,15 +142,15 @@ export default function AddInventoryPage() {
   </div>
 </div>
 
-    <div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
+<div className="bg-white p-4 rounded-lg shadow-sm border border-gray-200 mb-6">
   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 flex-wrap">
 
     {/* Left Side */}
-    <div className="flex flex-col sm:flex-row flex-wrap items-start sm:items-center gap-2 text-gray-700 text-sm sm:text-base font-light tracking-wide">
+    <div className="flex flex-wrap items-center text-gray-700 text-sm font-medium gap-2 sm:gap-4">
       
       {/* Dropdown */}
       <select
-        className="w-full sm:w-auto border border-gray-300 rounded-md px-3 py-1.5 text-sm sm:text-base font-normal text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        className="border border-gray-300 rounded-md px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         defaultValue="chelsea-vs-arsenal"
       >
         <option value="chelsea-vs-arsenal">Chelsea vs Arsenal - Premier League</option>
@@ -158,11 +158,35 @@ export default function AddInventoryPage() {
         <option value="city-vs-chelsea">Man City vs Chelsea - Champions League</option>
       </select>
 
-      {/* Separator and Match Info */}
-      <span className="text-gray-400 hidden sm:inline px-1">|</span>
-      <span className="text-gray-600">Sun, 10 Nov 2024</span>
-      <span className="text-gray-600">16:30</span>
-      <span className="text-gray-600">Stamford Bridge, London, United Kingdom</span>
+      {/* Calendar */}
+      <div className="flex items-center gap-1 text-gray-600">
+        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8 7V3m8 4V3M3 11h18M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        <span>Sun, 10 Nov 2024</span>
+      </div>
+
+      {/* Separator */}
+      <span className="text-gray-300">|</span>
+
+      {/* Time */}
+      <div className="flex items-center gap-1 text-gray-600">
+        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>16:30</span>
+      </div>
+
+      {/* Separator */}
+      <span className="text-gray-300">|</span>
+
+      {/* Location */}
+      <div className="flex items-center gap-1 text-gray-600">
+        <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 10-5.656 5.656l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z" />
+        </svg>
+        <span>Stamford Bridge, London, United Kingdom</span>
+      </div>
     </div>
 
     {/* Right Side – View Map Link */}
@@ -170,22 +194,17 @@ export default function AddInventoryPage() {
       href="https://www.google.com/maps/search/?api=1&query=Stamford+Bridge,+London,+United+Kingdom"
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-flex items-center gap-1 px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 text-sm sm:text-base font-medium transition"
+      className="inline-flex items-center gap-1 px-4 py-2 border border-blue-500 text-blue-500 rounded-md hover:bg-blue-50 text-sm font-medium transition"
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-4 text-blue-500"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-        strokeWidth={2}
-      >
+      <svg className="h-4 w-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" d="M17.657 16.657L13.414 12.414a4 4 0 10-5.656 5.656l4.243 4.243a8 8 0 1011.314-11.314l-4.243 4.243z" />
       </svg>
       View Map
     </a>
   </div>
 </div>
+
+
 
 
       <FormSection

@@ -167,9 +167,9 @@ const TableSection: React.FC<TableSectionProps> = ({
                       />
                     </td>
                     {[
-                      item.ticketType, item.quantity, item.splitType, item.maxDisplayQty,
+                      item.ticketType, item.quantity, item.splitType, item.maxDisplayQuantity,
                       item.category, item.sectionBlock, item.row, item.firstSeat,
-                      item.faceValue, item.payoutPrice, item.seating
+                      item.faceValue, item.payoutPrice, item.seatingArrangement
                     ].map((val, i) => (
                       <td key={i} className="px-2 py-2 border border-gray-200">
                         <div className="border border-gray-300 rounded px-2 py-1">{val}</div>

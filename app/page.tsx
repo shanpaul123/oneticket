@@ -220,7 +220,7 @@ export default function AddInventoryPage() {
         isLoading={loading}
         error={error}
       />
-            <FooterActions />
+            
 
     </Layout>
   );

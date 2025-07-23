@@ -11,11 +11,16 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="flex min-h-screen flex-col font-sans antialiased">
-        <div className="flex flex-col md:flex-row">
+    <html lang="en" className="h-full">
+      <body className="h-full overflow-hidden font-sans antialiased">
+        <div className="flex h-full">
+          {/* Sidebar (fixed width) */}
           <Sidebar />
-          <main className="flex-1 p-4 bg-gray-50 md:ml-16">{children}</main>
+
+          {/* Main content scrollable */}
+          <main className="flex-1 overflow-auto p-4 bg-gray-50">
+            {children}
+          </main>
         </div>
       </body>
     </html>

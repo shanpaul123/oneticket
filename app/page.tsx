@@ -149,9 +149,9 @@ export default function AddInventoryPage() {
     <div className="flex flex-wrap items-center text-gray-700 text-sm font-medium gap-2 sm:gap-4">
       
       {/* Dropdown */}
-      <div>
+      <div className="w-full sm:w-auto">
       <select
-        className="border border-gray-300 rounded-md px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        className="w-full sm:w-auto border border-gray-300 rounded-md px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         defaultValue="chelsea-vs-arsenal"
       >
         <option value="chelsea-vs-arsenal">Chelsea vs Arsenal - Premier League</option>

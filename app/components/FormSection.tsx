@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { InventoryItem } from '../type';
+import { HandRaisedIcon } from '@heroicons/react/24/outline';
 
 interface FormSectionProps {
   onAddListing: (item: InventoryItem) => void;
@@ -283,30 +284,17 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
           />
         </div>
   {/* Tickets in Hand */}
-<div>
-  <label className="text-sm font-light text-gray-500 mb-1 block">
-    Tickets in Hand
-  </label>
-  <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#1C1C1C] text-sm font-medium cursor-pointer shadow-sm">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4 mr-2 text-[#4A3AFF]"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2l4 -4" />
-    </svg>
-    Tickets in Hand
-    <input
-      type="checkbox"
-      name="ticketsInHand"
-      checked={formData.ticketsInHand}
-      onChange={handleChange}
-      className="ml-2 h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
-    />
-  </label>
+  <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm">
+  <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
+  <span>Tickets in Hand</span>
+  <input
+    type="checkbox"
+    className="ml-auto h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
+    checked={formData.ticketsInHand}
+    onChange={handleChange}
+  />
 </div>
+
 
 {/* Upload Tickets */}
 <div>

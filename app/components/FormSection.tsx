@@ -93,31 +93,30 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 mb-6"
+      className="bg-white px-6 py-5 rounded-xl border border-[#e5e7eb] shadow-sm mb-6"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         {/* Ticket Type */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
-            Ticket Type <span className="text-red-500">*</span>
-          </label>
+        <label className="text-sm font-light text-gray-500 mb-1 block tracking-wide">
+  Ticket Type <span className="text-red-500">*</span>
+</label>
           <select
             name="ticketType"
             value={formData.ticketType}
             onChange={handleChange}
             required
-            className="form-select mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
           >
             <option value="">Select</option>
             <option value="E-ticket">E-ticket</option>
             <option value="Local Delivery">Local Delivery</option>
           </select>
         </div>
-
+  
         {/* Quantity */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-gray-500 mb-1 block">
             Quantity <span className="text-red-500">*</span>
           </label>
           <input
@@ -126,122 +125,122 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             value={formData.quantity}
             onChange={handleChange}
             required
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
-
+  
         {/* Split Type */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Split Type</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Split Type</label>
           <input
             type="text"
             name="splitType"
             value={formData.splitType || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Seating Arrangement */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Seating Arrangement</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Seating Arrangement</label>
           <input
             type="text"
             name="seatingArrangement"
             value={formData.seatingArrangement || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Max Display Quantity */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Max Display Quantity</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Max Display Quantity</label>
           <input
             type="number"
             name="maxDisplayQuantity"
             value={formData.maxDisplayQuantity}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Fan Area */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Fan Area</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Fan Area</label>
           <input
             type="text"
             name="fanArea"
             value={formData.fanArea || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Category */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Category</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Category</label>
           <input
             type="text"
             name="category"
             value={formData.category || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Section Block */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Section Block</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Section Block</label>
           <input
             type="text"
             name="sectionBlock"
             value={formData.sectionBlock || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Row */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Row</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Row</label>
           <input
             type="text"
             name="row"
             value={formData.row || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* First Seat */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">First Seat</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">First Seat</label>
           <input
             type="number"
             name="firstSeat"
             value={formData.firstSeat}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Face Value */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Face Value</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Face Value</label>
           <input
             type="number"
             name="faceValue"
             value={formData.faceValue}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
             step="0.01"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Payout Price */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">
+          <label className="text-sm font-medium text-gray-500 mb-1 block">
             Payout Price <span className="text-red-500">*</span>
           </label>
           <input
@@ -250,78 +249,79 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             value={formData.payoutPrice}
             onChange={handleChange}
             required
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
             step="0.01"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Restrictions */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Restrictions</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Restrictions</label>
           <input
             type="text"
             name="restrictions"
             value={formData.restrictions || ''}
             onChange={handleChange}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Date to Ship */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Date to Ship</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Date to Ship</label>
           <input
             type="date"
             name="dateToShip"
             value={formData.dateToShip ? new Date(formData.dateToShip).toISOString().split('T')[0] : ''}
-            onChange={(e) => {
+            onChange={(e) =>
               setFormData((prev) => ({
                 ...prev,
                 dateToShip: new Date(e.target.value),
-              }));
-            }}
-            className="form-input mt-1 block w-full border border-gray-300 rounded-md"
+              }))
+            }
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-
+  
         {/* Tickets in Hand */}
-        <div className="flex items-center">
+        <div className="flex items-center space-x-2 mt-2">
           <input
             type="checkbox"
             name="ticketsInHand"
             checked={formData.ticketsInHand}
             onChange={handleChange}
-            className="mr-2"
+            className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
           />
-          <label className="text-sm font-medium text-gray-700">Tickets in Hand</label>
+          <label className="text-sm font-medium text-gray-500">Tickets in Hand</label>
         </div>
-
+  
         {/* Upload Tickets */}
         <div>
-          <label className="block text-sm font-medium text-gray-700">Upload Tickets</label>
+          <label className="text-sm font-medium text-gray-500 mb-1 block">Upload Tickets</label>
           <input
             type="file"
             name="uploadedTickets"
             accept=".pdf,.jpg,.jpeg,.png"
             onChange={handleFileUpload}
-            className="form-input mt-1 block w-full text-sm text-gray-700 border border-gray-300 rounded-md"
+            className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium"
           />
           {uploadedFile && (
             <p className="text-xs text-gray-500 mt-1">Selected: {uploadedFile.name}</p>
           )}
         </div>
       </div>
-
-      <div className="mt-4">
+  
+      <div className="mt-6 flex justify-start">
         <button
           type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700"
+          className="bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium px-5 py-2.5 rounded-md transition"
         >
           {editingItem ? 'Update Listing' : 'Add Listing'}
         </button>
       </div>
     </form>
   );
+  
 };
 
 export default FormSection;

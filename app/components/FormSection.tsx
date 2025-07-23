@@ -1,13 +1,13 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect } from 'react';
-import { InventoryItem } from '../type';
-import { HandRaisedIcon } from '@heroicons/react/24/outline';
+import React, { useState, useEffect } from 'react'
+import { InventoryItem } from '../type'
+import { HandRaisedIcon } from '@heroicons/react/24/outline'
 
 interface FormSectionProps {
-  onAddListing: (item: InventoryItem) => void;
-  editingItem?: InventoryItem | null;
-  onEditDone?: () => void;
+  onAddListing: (item: InventoryItem) => void
+  editingItem?: InventoryItem | null
+  onEditDone?: () => void
 }
 
 const defaultFormState: InventoryItem = {
@@ -28,27 +28,26 @@ const defaultFormState: InventoryItem = {
   dateToShip: new Date(),
   ticketsInHand: false,
   uploadedTickets: false,
-};
+}
 
 const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, onEditDone }) => {
-  const [formData, setFormData] = useState<InventoryItem>(defaultFormState);
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [formData, setFormData] = useState<InventoryItem>(defaultFormState)
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null)
 
   useEffect(() => {
     if (editingItem) {
-      setFormData(editingItem);
-      setUploadedFile(null);
+      setFormData(editingItem)
+      setUploadedFile(null)
     } else {
-      setFormData(defaultFormState);
-      setUploadedFile(null);
+      setFormData(defaultFormState)
+      setUploadedFile(null)
     }
-  }, [editingItem]);
+  }, [editingItem])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = e.target as HTMLInputElement | HTMLSelectElement;
-const { name, value, type } = target;
-const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
-
+    const target = e.target
+    const { name, value, type } = target
+    const val = type === 'checkbox' && 'checked' in target ? target.checked : value
 
     setFormData((prev) => ({
       ...prev,
@@ -60,48 +59,48 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
           : name === 'faceValue' || name === 'payoutPrice'
           ? parseFloat(val)
           : val,
-    }));
-  };
+    }))
+  }
 
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0] || null;
-    setUploadedFile(file);
+    const file = e.target.files?.[0] || null
+    setUploadedFile(file)
     setFormData((prev) => ({
       ...prev,
       uploadedTickets: !!file,
-    }));
-  };
+    }))
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!formData.ticketType || !formData.quantity || !formData.payoutPrice) {
-      alert('Please fill all required fields marked with *.');
-      return;
+      alert('Please fill all required fields marked with *.')
+      return
     }
 
     const itemToAdd: InventoryItem = {
       ...formData,
       id: editingItem ? editingItem.id : `item-${Date.now()}`,
-    };
+    }
 
-    onAddListing(itemToAdd);
-    setFormData(defaultFormState);
-    setUploadedFile(null);
-    onEditDone?.();
-  };
+    onAddListing(itemToAdd)
+    setFormData(defaultFormState)
+    setUploadedFile(null)
+    onEditDone?.()
+  }
 
   return (
     <form
       onSubmit={handleSubmit}
       className="bg-white px-6 py-5 rounded-xl border border-[#e5e7eb] shadow-sm mb-6"
     >
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Ticket Type */}
         <div>
-        <label className="text-sm font-light text-gray-500 mb-1 block tracking-wide">
-  Ticket Type <span className="text-red-500">*</span>
-</label>
+          <label className="text-sm font-light text-gray-500 mb-1 block tracking-wide">
+            Ticket Type <span className="text-red-500">*</span>
+          </label>
           <select
             name="ticketType"
             value={formData.ticketType}
@@ -114,7 +113,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             <option value="Local Delivery">Local Delivery</option>
           </select>
         </div>
-  
+
         {/* Quantity */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">
@@ -129,7 +128,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
-  
+
         {/* Split Type */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Split Type</label>
@@ -141,7 +140,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Seating Arrangement */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Seating Arrangement</label>
@@ -153,7 +152,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Max Display Quantity */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Max Display Quantity</label>
@@ -165,7 +164,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Fan Area */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Fan Area</label>
@@ -177,7 +176,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Category */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Category</label>
@@ -189,7 +188,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Section Block */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Section Block</label>
@@ -201,7 +200,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Row */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Row</label>
@@ -213,7 +212,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* First Seat */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">First Seat</label>
@@ -225,7 +224,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Face Value */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Face Value</label>
@@ -238,7 +237,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Payout Price */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">
@@ -254,7 +253,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Restrictions */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Restrictions</label>
@@ -266,7 +265,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  
+
         {/* Date to Ship */}
         <div>
           <label className="text-sm font-light text-gray-500 mb-1 block">Date to Ship</label>
@@ -283,54 +282,51 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
             className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
           />
         </div>
-  {/* Tickets in Hand */}
-  <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm">
-  <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
-  <span>Tickets in Hand</span>
-  <input
-    type="checkbox"
-    className="ml-auto h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
-    checked={formData.ticketsInHand}
-    onChange={handleChange}
-  />
-</div>
 
+        {/* Tickets in Hand */}
+        <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm">
+          <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
+          <span className="mr-auto">Tickets in Hand</span>
+          <input
+            type="checkbox"
+            name="ticketsInHand"
+            className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
+            checked={formData.ticketsInHand}
+            onChange={handleChange}
+          />
+        </div>
 
-{/* Upload Tickets */}
-<div>
-  <label className="text-sm font-light text-gray-500 mb-1 block">
-    Upload Tickets
-  </label>
-  <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#A2A2A2] text-sm font-medium cursor-pointer shadow-sm">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-4 w-4 mr-2 text-[#A2A2A2]"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0l-4 4m4-4l4 4"
-      />
-    </svg>
-    Upload Tickets
-    <input
-      type="file"
-      name="uploadedTickets"
-      accept=".pdf,.jpg,.jpeg,.png"
-      onChange={handleFileUpload}
-      className="hidden"
-    />
-  </label>
-</div>
-
-
-        
+        {/* Upload Tickets */}
+        <div>
+          <label className="text-sm font-light text-gray-500 mb-1 block">Upload Tickets</label>
+          <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#A2A2A2] text-sm font-medium cursor-pointer shadow-sm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4 mr-2 text-[#A2A2A2]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0l-4 4m4-4l4 4"
+              />
+            </svg>
+            Upload Tickets
+            <input
+              type="file"
+              name="uploadedTickets"
+              accept=".pdf,.jpg,.jpeg,.png"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+          </label>
+        </div>
       </div>
-  
+
+      {/* Submit */}
       <div className="mt-6 flex justify-start">
         <button
           type="submit"
@@ -340,8 +336,7 @@ const val = type === 'checkbox' && 'checked' in target ? target.checked : value;
         </button>
       </div>
     </form>
-  );
-  
-};
+  )
+}
 
-export default FormSection;
+export default FormSection

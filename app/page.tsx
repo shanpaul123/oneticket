@@ -149,6 +149,7 @@ export default function AddInventoryPage() {
     <div className="flex flex-wrap items-center text-gray-700 text-sm font-medium gap-2 sm:gap-4">
       
       {/* Dropdown */}
+      <div>
       <select
         className="border border-gray-300 rounded-md px-3 py-1.5 text-sm text-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500"
         defaultValue="chelsea-vs-arsenal"
@@ -157,7 +158,7 @@ export default function AddInventoryPage() {
         <option value="manutd-vs-liverpool">Man Utd vs Liverpool - FA Cup</option>
         <option value="city-vs-chelsea">Man City vs Chelsea - Champions League</option>
       </select>
-
+   </div>
       {/* Calendar */}
       <div className="flex items-center gap-1 text-gray-600">
         <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">

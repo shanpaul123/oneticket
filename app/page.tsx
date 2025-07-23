@@ -120,7 +120,7 @@ export default function AddInventoryPage() {
   <h1 className="text-2xl font-bold">Add Inventory</h1>
 
   <div className="flex items-center gap-4">
-    <button className="border border-blue-600 text-blue-600 px-4 py-1.5 rounded-md text-sm font-medium hover:bg-blue-50 transition">
+    <button onClick={() => alert("Requesting event...")} className="border border-blue-600 text-blue-600 px-4 py-1.5 rounded-md text-sm font-medium hover:bg-blue-50 transition">
       Request Event
     </button>
     <button className="bg-[#00AEEF] w-10 h-10 flex items-center justify-center rounded-full shadow-md hover:bg-[#0095cc] transition">

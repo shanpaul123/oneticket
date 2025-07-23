@@ -106,7 +106,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             value={formData.ticketType}
             onChange={handleChange}
             required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           >
             <option value="">Select</option>
             <option value="E-ticket">E-ticket</option>
@@ -125,7 +125,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             value={formData.quantity}
             onChange={handleChange}
             required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -137,7 +137,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="splitType"
             value={formData.splitType || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -149,7 +149,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="seatingArrangement"
             value={formData.seatingArrangement || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -161,7 +161,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="maxDisplayQuantity"
             value={formData.maxDisplayQuantity}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -173,7 +173,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="fanArea"
             value={formData.fanArea || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -185,7 +185,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="category"
             value={formData.category || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -197,7 +197,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="sectionBlock"
             value={formData.sectionBlock || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -209,7 +209,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="row"
             value={formData.row || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -221,7 +221,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="firstSeat"
             value={formData.firstSeat}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -234,7 +234,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             value={formData.faceValue}
             onChange={handleChange}
             step="0.01"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -250,7 +250,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             onChange={handleChange}
             required
             step="0.01"
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -262,7 +262,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
             name="restrictions"
             value={formData.restrictions || ''}
             onChange={handleChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 
@@ -279,7 +279,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
                 dateToShip: new Date(e.target.value),
               }))
             }
-            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
           />
         </div>
 

@@ -143,8 +143,9 @@ const TableSection: React.FC<TableSectionProps> = ({
 
 </div>
       {!isLoading && !error && (
-        
-        <table className="min-w-full border border-gray-200 text-[13px] font-[Inter] text-gray-700">
+        <div className="w-full overflow-x-auto">
+
+        <table className="min-w-[1200px] border border-gray-200 text-[13px] font-[Inter] text-gray-700">
           <thead className="bg-[#F7F8FC] text-gray-500 text-xs font-medium uppercase">
             <tr>
               <th className="px-2 py-3 border border-gray-200 text-left">
@@ -232,6 +233,7 @@ const TableSection: React.FC<TableSectionProps> = ({
             )}
           </tbody>
         </table>
+        </div>
       )}
 
 <FooterActions

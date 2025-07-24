@@ -120,18 +120,28 @@ const TableSection: React.FC<TableSectionProps> = ({
                         onChange={handleSelectAll}
                       />
                     </th>
-                    {[
-  'Ticket Type', 'Quantity', 'Split Type', 'Max Display Quantity',
-  'Category', 'Section/Block', 'Row', 'First Seat',
-  'Face Value', 'Payout Price', 'Seating', 'Actions'
-].map((label, idx) => (
+                   {[
+  { label: 'Ticket Type', width: 'w-[150px]' },
+  { label: 'Quantity', width: 'w-[70px]' },
+  { label: 'Split Type', width: 'w-[150px]' },
+  { label: 'Max Display Quantity', width: 'w-[50]' },
+  { label: 'Category', width: 'w-[100px]' },
+  { label: 'Section/Block', width: 'w-[100px]' },
+  { label: 'Row', width: 'w-[90px]' },
+  { label: 'First Seat', width: 'w-[110px]' },
+  { label: 'Face Value', width: 'w-[110px]' },
+  { label: 'Payout Price', width: 'w-[120px]' },
+  { label: 'Seating', width: 'w-[200px]' },
+  { label: 'Actions', width: 'w-[100px]' },
+].map((col, idx) => (
   <th
     key={idx}
-    className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap normal-case w-[120px]"
+    className={`px-2 py-3 border border-gray-200 text-left whitespace-nowrap normal-case ${col.width}`}
   >
-    {label}
+    {col.label}
   </th>
 ))}
+
 
                   </tr>
                 </thead>

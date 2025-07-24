@@ -127,7 +127,7 @@ const TableSection: React.FC<TableSectionProps> = ({
 ].map((label, idx) => (
   <th
     key={idx}
-    className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap normal-case w-[100%]"
+    className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap normal-case w-[120px]"
   >
     {label}
   </th>

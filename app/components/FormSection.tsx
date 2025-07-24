@@ -433,15 +433,13 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
 
 
           {/* Upload Tickets */}
-         <FormControl fullWidth size="small" margin="dense">
- 
-
+          <FormControl fullWidth size="small" margin="dense">
   <label htmlFor="upload-tickets">
     <input
       id="upload-tickets"
       name="uploadTickets"
       type="file"
-      accept=".pdf,.jpg,.png" // optional: adjust file types
+      accept=".pdf,.jpg,.png"
       onChange={handleFileUpload}
       style={{ display: 'none' }}
     />
@@ -449,41 +447,40 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
     <Button
       variant="outlined"
       component="span"
-      startIcon={<CloudUploadIcon />}
+      startIcon={
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <CloudUploadIcon style={{ color: '#5C5C8A' }} />
+          {/* Vertical Line */}
+          <div
+            style={{
+              height: 20,
+              width: 1,
+              backgroundColor: '#E0E0E0',
+              marginLeft: 8,
+              marginRight: 8,
+            }}
+          />
+        </div>
+      }
       sx={{
         justifyContent: 'flex-start',
         fontSize: '0.75rem',
         textTransform: 'none',
-        paddingY: 0.6, // reduced height here
+        paddingY: 0.6,
         paddingX: 2,
         borderRadius: 1,
         width: '100%',
         color: '#5C5C8A',
         borderColor: '#E0E0E0',
         backgroundColor: '#FAFAFA',
-        minHeight: '35px', // optional: enforce shorter height
+        minHeight: '35px',
       }}
     >
       Upload Tickets
     </Button>
   </label>
 </FormControl>
-{/* sx={{
-        justifyContent: 'flex-start',
-        fontSize: '0.75rem',
-        textTransform: 'none',
-        paddingY: 1.3,
-        paddingX: 2 ,
-        borderRadius: 1,
-        color: '#5C5C8A',
-        borderColor: '#E0E0E0',
-        backgroundColor: '#FAFAFA',
-        '&:hover': {
-          backgroundColor: '#F5F5F5',
-          borderColor: '#C4C4C4',
-        },
-        boxShadow: 'none',
-      }} */}
+
         </div>
       </div>
       {/* Submit */}

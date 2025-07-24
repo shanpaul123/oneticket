@@ -105,6 +105,16 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
     { value: 'E-ticket', label: 'E-ticket' },
     { value: 'Local Delivery', label: 'Local Delivery' },
   ];
+  const cat = [
+    { value: '', label: 'Select' },
+    { value: 'premium', label: 'Premium' },
+    { value: 'luxery', label: 'luxery' },
+  ];
+  const section = [
+    { value: '', label: 'Select' },
+    { value: 'section 1', label: 'Section 1' },
+    { value: 'section 2', label: 'Section 2' },
+  ];
   return (
     <form
       onSubmit={handleSubmit}
@@ -213,19 +223,54 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
 />
 
-<TextField
-  label="Category"
-  name="category"
-  type="text"
-  value={formData.category || ""}
-  onChange={handleChange}
-  fullWidth
-  size="small"
-  margin="dense"
-  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
-/>
+<FormControl fullWidth size="small" margin="dense">
+  <InputLabel
+    id="category-label"
+    sx={{ fontSize: "0.75rem" }}
+  >
+    Category
+  </InputLabel>
+  <Select
+    labelId="category-label"
+    id="category"
+    name="category"
+    value={formData.category || ""}
+    onChange={handleChange}
+    sx={{ fontSize: "0.75rem" }}
+    label="Category"
+  >
+  {cat.map((option) => (
+      <MenuItem key={option.value} value={option.value}>
+        {option.label}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
+<FormControl fullWidth size="small" margin="dense">
+  <InputLabel
+    id="Section-label"
+    sx={{ fontSize: "0.75rem" }}
+  >
+    Section Block
+  </InputLabel>
+  <Select
+    labelId="Section-label"
+    id="sectionBlock"
+    name="sectionBlock"
+    value={formData.sectionBlock || ""}
+    onChange={handleChange}
+    sx={{ fontSize: "0.75rem" }}
+    label="sectionBlock"
+  >
+  {section.map((option) => (
+      <MenuItem key={option.value} value={option.value}>
+        {option.label}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
 
-<TextField
+{/* <TextField
   label="Section Block"
   name="sectionBlock"
   type="text"
@@ -235,7 +280,7 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   size="small"
   margin="dense"
   sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
-/>
+/> */}
 
 <TextField
   label="Row"

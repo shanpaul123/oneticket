@@ -4,6 +4,8 @@ import React, { useState, useEffect } from 'react'
 import { InventoryItem } from '../type'
 import { HandRaisedIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/24/solid'
+import InputAdornment from '@mui/material/InputAdornment';
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney'; // dollar icon
 import {
   TextField,
   MenuItem,
@@ -305,7 +307,6 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   margin="dense"
   sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
 />
-
 <TextField
   label="Face Value"
   name="faceValue"
@@ -316,9 +317,17 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   fullWidth
   size="small"
   margin="dense"
-  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <AttachMoneyIcon sx={{ fontSize: '1rem', color: '#6b7280' }} />
+      </InputAdornment>
+    ),
+  }}
+  sx={{
+    "& .MuiInputBase-root": { fontSize: "0.75rem" }
+  }}
 />
-
 <TextField
   required
   label="Payout Price"
@@ -330,6 +339,13 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   fullWidth
   size="small"
   margin="dense"
+  InputProps={{
+    startAdornment: (
+      <InputAdornment position="start">
+        <AttachMoneyIcon sx={{ fontSize: '1rem', color: '#6b7280' }} />
+      </InputAdornment>
+    ),
+  }}
   sx={{
     "& .MuiInputBase-root": {
       fontSize: "0.75rem",

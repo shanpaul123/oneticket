@@ -9,9 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
     "@fontsource/inter": "^5.2.6",
     "@fontsource/poppins": "^5.2.6",
     "@heroicons/react": "^2.2.0",
+    "@mui/icons-material": "^7.2.0",
+    "@mui/material": "^7.2.0",
     "geist": "^1.4.2",
     "next": "15.4.2",
     "react": "19.1.0",

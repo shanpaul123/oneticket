@@ -4,6 +4,16 @@ import React, { useState, useEffect } from 'react'
 import { InventoryItem } from '../type'
 import { HandRaisedIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/24/solid'
+import {
+  TextField,
+  MenuItem,
+  Select,
+  InputLabel,
+  FormControl,
+  Checkbox,
+  FormControlLabel,
+  Button,
+} from '@mui/material'
 
 interface FormSectionProps {
   onAddListing: (item: InventoryItem) => void
@@ -90,7 +100,11 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
     setUploadedFile(null)
     onEditDone?.()
   }
-
+  const ticketTypes = [
+    { value: '', label: 'Select' },
+    { value: 'E-ticket', label: 'E-ticket' },
+    { value: 'Local Delivery', label: 'Local Delivery' },
+  ];
   return (
     <form
       onSubmit={handleSubmit}
@@ -99,237 +113,260 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
       <div className="bg-white px-5 py-5 border-b border-[#e5e7eb] shadow-sm">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
           {/* Ticket Type */}
+          
           <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block tracking-wide">
-              Ticket Type <span className="text-red-500">*</span>
-            </label>
-            <select
-              name="ticketType"
-              value={formData.ticketType}
-              onChange={handleChange}
-              required
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            >
-              <option value="">Select</option>
-              <option value="E-ticket">E-ticket</option>
-              <option value="Local Delivery">Local Delivery</option>
-            </select>
+         
+<TextField
+  select
+  size="small"
+  margin="dense"
+  required
+  fullWidth
+  name="ticketType"
+  id="outlined-ticketType"
+  label="Ticket Type"
+  value={formData.ticketType}
+  onChange={handleChange}
+  sx={{
+    "& .MuiInputBase-root": {
+      fontSize: "0.75rem", // Match text size to Tailwind's `text-sm`
+    },
+    "& .MuiInputLabel-asterisk": {
+      color: "red", // Make the asterisk red
+    },
+  }}
+>
+  {ticketTypes.map((option) => (
+    <MenuItem key={option.value} value={option.value}>
+      {option.label}
+    </MenuItem>
+  ))}
+</TextField>
+          
           </div>
 
-          {/* Quantity */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">
-              Quantity <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="quantity"
-              value={formData.quantity}
-              onChange={handleChange}
-              required
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  required
+  label="Quantity"
+  name="quantity"
+  type="number"
+  value={formData.quantity}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{
+    "& .MuiInputBase-root": {
+      fontSize: "0.75rem",
+    },
+    "& .MuiInputLabel-asterisk": {
+      color: "red",
+    },
+  }}
+/>
 
-          {/* Split Type */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Split Type</label>
-            <input
-              type="text"
-              name="splitType"
-              value={formData.splitType || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Split Type"
+  name="splitType"
+  type="text"
+  value={formData.splitType || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Seating Arrangement */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Seating Arrangement</label>
-            <input
-              type="text"
-              name="seatingArrangement"
-              value={formData.seatingArrangement || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Seating Arrangement"
+  name="seatingArrangement"
+  type="text"
+  value={formData.seatingArrangement || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Max Display Quantity */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Max Display Quantity</label>
-            <input
-              type="number"
-              name="maxDisplayQuantity"
-              value={formData.maxDisplayQuantity}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Max Display Quantity"
+  name="maxDisplayQuantity"
+  type="number"
+  value={formData.maxDisplayQuantity}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Fan Area */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Fan Area</label>
-            <input
-              type="text"
-              name="fanArea"
-              value={formData.fanArea || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Fan Area"
+  name="fanArea"
+  type="text"
+  value={formData.fanArea || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Category */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Category</label>
-            <input
-              type="text"
-              name="category"
-              value={formData.category || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Category"
+  name="category"
+  type="text"
+  value={formData.category || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Section Block */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Section Block</label>
-            <input
-              type="text"
-              name="sectionBlock"
-              value={formData.sectionBlock || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Section Block"
+  name="sectionBlock"
+  type="text"
+  value={formData.sectionBlock || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Row */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Row</label>
-            <input
-              type="text"
-              name="row"
-              value={formData.row || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Row"
+  name="row"
+  type="text"
+  value={formData.row || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* First Seat */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">First Seat</label>
-            <input
-              type="number"
-              name="firstSeat"
-              value={formData.firstSeat}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="First Seat"
+  name="firstSeat"
+  type="number"
+  value={formData.firstSeat}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Face Value */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Face Value</label>
-            <input
-              type="number"
-              name="faceValue"
-              value={formData.faceValue}
-              onChange={handleChange}
-              step="0.01"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Face Value"
+  name="faceValue"
+  type="number"
+  value={formData.faceValue}
+  onChange={handleChange}
+  step="0.01"
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Payout Price */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">
-              Payout Price <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="number"
-              name="payoutPrice"
-              value={formData.payoutPrice}
-              onChange={handleChange}
-              required
-              step="0.01"
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  required
+  label="Payout Price"
+  name="payoutPrice"
+  type="number"
+  value={formData.payoutPrice}
+  onChange={handleChange}
+  step="0.01"
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{
+    "& .MuiInputBase-root": {
+      fontSize: "0.75rem",
+    },
+    "& .MuiInputLabel-asterisk": {
+      color: "red",
+    },
+  }}
+/>
 
-          {/* Restrictions */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Restrictions</label>
-            <input
-              type="text"
-              name="restrictions"
-              value={formData.restrictions || ''}
-              onChange={handleChange}
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Restrictions"
+  name="restrictions"
+  type="text"
+  value={formData.restrictions || ""}
+  onChange={handleChange}
+  fullWidth
+  size="small"
+  margin="dense"
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
 
-          {/* Date to Ship */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Date to Ship</label>
-            <input
-              type="date"
-              name="dateToShip"
-              value={formData.dateToShip ? new Date(formData.dateToShip).toISOString().split('T')[0] : ''}
-              onChange={(e) =>
-                setFormData((prev) => ({
-                  ...prev,
-                  dateToShip: new Date(e.target.value),
-                }))
-              }
-              className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm font-normal focus:outline-none focus:ring-1 focus:ring-blue-500"
-            />
-          </div>
+<TextField
+  label="Date to Ship"
+  name="dateToShip"
+  type="date"
+  value={
+    formData.dateToShip
+      ? new Date(formData.dateToShip).toISOString().split("T")[0]
+      : ""
+  }
+  onChange={(e) =>
+    setFormData((prev) => ({
+      ...prev,
+      dateToShip: new Date(e.target.value),
+    }))
+  }
+  fullWidth
+  size="small"
+  margin="dense"
+  InputLabelProps={{ shrink: true }}
+  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
+/>
+
+
+
 
           {/* Tickets in Hand */}
-          <div>
+          <FormControl fullWidth size="small" margin="dense">
+  <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm h-[40px]">
+    <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
+    <span className="mr-auto">Tickets in Hand</span>
+    <input
+      type="checkbox"
+      name="ticketsInHand"
+      className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
+      checked={formData.ticketsInHand}
+      onChange={handleChange}
+    />
+  </div>
+</FormControl>
 
-            <label className="text-sm font-light text-gray-500 mb-1 block">&nbsp;</label>
-            <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm">
-              <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
-              <span className="mr-auto">Tickets in Hand</span>
-              <input
-                type="checkbox"
-                name="ticketsInHand"
-                className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
-                checked={formData.ticketsInHand}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
 
           {/* Upload Tickets */}
-          <div>
-            <label className="text-sm font-light text-gray-500 mb-1 block">Upload Tickets</label>
-            <label className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-[#A2A2A2] text-sm font-medium cursor-pointer shadow-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 mr-2 text-[#A2A2A2]"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1M12 12V4m0 0l-4 4m4-4l4 4"
-                />
-              </svg>
-              Upload Tickets
-              <input
-                type="file"
-                name="uploadedTickets"
-                accept=".pdf,.jpg,.jpeg,.png"
-                onChange={handleFileUpload}
-                className="hidden"
-              />
-            </label>
-          </div>
+          <FormControl fullWidth size="small" margin="dense">
+  <InputLabel shrink htmlFor="upload-tickets" style={{ marginBottom: 4 }}>
+    Upload Tickets
+  </InputLabel>
+  <input
+    id="upload-tickets"
+    name="uploadTickets"
+    type="file"
+    onChange={handleFileUpload}
+    style={{
+      border: '1px solid #c4c4c4',
+      borderRadius: 4,
+      padding: '5px 12px',
+      fontSize: '0.875rem',
+      fontFamily: 'Roboto, sans-serif',
+    }}
+  />
+</FormControl>
         </div>
       </div>
       {/* Submit */}

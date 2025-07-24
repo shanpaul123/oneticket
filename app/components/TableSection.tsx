@@ -121,14 +121,18 @@ const TableSection: React.FC<TableSectionProps> = ({
                       />
                     </th>
                     {[
-                      'Ticket Type', 'Quantity', 'Split Type', 'Max Display Quantity',
-                      'Category', 'Section/Block', 'Row', 'First Seat',
-                      'Face Value', 'Payout Price', 'Seating', 'Actions'
-                    ].map((label, idx) => (
-                      <th key={idx} className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap">
-                        {label}
-                      </th>
-                    ))}
+  'Ticket Type', 'Quantity', 'Split Type', 'Max Display Quantity',
+  'Category', 'Section/Block', 'Row', 'First Seat',
+  'Face Value', 'Payout Price', 'Seating', 'Actions'
+].map((label, idx) => (
+  <th
+    key={idx}
+    className="px-2 py-3 border border-gray-200 text-left whitespace-nowrap normal-case w-[100%]"
+  >
+    {label}
+  </th>
+))}
+
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 bg-white">

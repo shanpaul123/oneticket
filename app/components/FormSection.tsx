@@ -117,6 +117,11 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
     { value: 'section 1', label: 'Section 1' },
     { value: 'section 2', label: 'Section 2' },
   ];
+  const restriction = [
+    { value: '', label: 'Select' },
+    { value: 'Restriction 1', label: 'Restriction 1' },
+    { value: 'Restriction 2', label: 'Restriction 2' },
+  ];
   return (
     <form
       onSubmit={handleSubmit}
@@ -356,17 +361,31 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   }}
 />
 
-<TextField
-  label="Restrictions"
-  name="restrictions"
-  type="text"
-  value={formData.restrictions || ""}
-  onChange={handleChange}
-  fullWidth
-  size="small"
-  margin="dense"
-  sx={{ "& .MuiInputBase-root": { fontSize: "0.75rem" } }}
-/>
+<FormControl fullWidth size="small" margin="dense">
+  <InputLabel
+    id="Restrictions"
+    sx={{ fontSize: "0.75rem" }}
+  >
+   Restrictions
+  </InputLabel>
+  <Select
+    labelId="Restrictions-label"
+    id="Restrictions"
+    name="restrictions"
+    value={formData.restrictions || ""}
+    onChange={handleChange}
+    sx={{ fontSize: "0.75rem" }}
+    label="sectionBlock"
+  >
+  {restriction.map((option) => (
+      <MenuItem key={option.value} value={option.value}>
+        {option.label}
+      </MenuItem>
+    ))}
+  </Select>
+</FormControl>
+
+
 
 <TextField
   label="Date to Ship"

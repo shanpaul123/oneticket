@@ -113,12 +113,12 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
   const cat = [
     { value: '', label: 'Select' },
     { value: 'premium', label: 'Premium' },
-    { value: 'luxery', label: 'luxery' },
+    { value: 'luxury', label: 'Luxury' },
   ];
   const section = [
     { value: '', label: 'Select' },
-    { value: 'section 1', label: 'Section 1' },
-    { value: 'section 2', label: 'Section 2' },
+    { value: 'Section 1', label: 'Section 1' },
+    { value: 'Section 2', label: 'Section 2' },
   ];
   const restriction = [
     { value: '', label: 'Select' },

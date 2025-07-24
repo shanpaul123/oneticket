@@ -6,6 +6,8 @@ import { HandRaisedIcon } from '@heroicons/react/24/outline'
 import { PlusIcon } from '@heroicons/react/24/solid'
 import InputAdornment from '@mui/material/InputAdornment';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney'; // dollar icon
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 import {
   TextField,
   MenuItem,
@@ -15,6 +17,7 @@ import {
   Checkbox,
   FormControlLabel,
   Button,
+  Box,
 } from '@mui/material'
 
 interface FormSectionProps {
@@ -414,13 +417,13 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
 
           {/* Tickets in Hand */}
           <FormControl fullWidth size="small" margin="dense">
-  <div className="flex items-center px-3 py-2 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm h-[40px]">
-    <HandRaisedIcon className="h-5 w-5 text-[#384072] mr-2" />
+  <div className="flex items-center px-3 py-1.5 border border-gray-300 rounded-md bg-white text-sm font-medium shadow-sm h-[36px]">
+    <HandRaisedIcon className="h-4 w-4 text-[#384072] mr-2" />
     <span className="mr-auto">Tickets in Hand</span>
     <input
       type="checkbox"
       name="ticketsInHand"
-      className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-0"
+      className="h-3.5 w-3.5 text-blue-600 border-gray-300 rounded focus:ring-0"
       checked={formData.ticketsInHand}
       onChange={handleChange}
     />
@@ -428,25 +431,59 @@ const FormSection: React.FC<FormSectionProps> = ({ onAddListing, editingItem, on
 </FormControl>
 
 
+
           {/* Upload Tickets */}
-          <FormControl fullWidth size="small" margin="dense">
-  <InputLabel shrink htmlFor="upload-tickets" style={{ marginBottom: 4 }}>
-    Upload Tickets
-  </InputLabel>
-  <input
-    id="upload-tickets"
-    name="uploadTickets"
-    type="file"
-    onChange={handleFileUpload}
-    style={{
-      border: '1px solid #c4c4c4',
-      borderRadius: 4,
-      padding: '5px 12px',
-      fontSize: '0.875rem',
-      fontFamily: 'Roboto, sans-serif',
-    }}
-  />
+         <FormControl fullWidth size="small" margin="dense">
+ 
+
+  <label htmlFor="upload-tickets">
+    <input
+      id="upload-tickets"
+      name="uploadTickets"
+      type="file"
+      accept=".pdf,.jpg,.png" // optional: adjust file types
+      onChange={handleFileUpload}
+      style={{ display: 'none' }}
+    />
+
+    <Button
+      variant="outlined"
+      component="span"
+      startIcon={<CloudUploadIcon />}
+      sx={{
+        justifyContent: 'flex-start',
+        fontSize: '0.75rem',
+        textTransform: 'none',
+        paddingY: 0.6, // reduced height here
+        paddingX: 2,
+        borderRadius: 1,
+        width: '100%',
+        color: '#5C5C8A',
+        borderColor: '#E0E0E0',
+        backgroundColor: '#FAFAFA',
+        minHeight: '35px', // optional: enforce shorter height
+      }}
+    >
+      Upload Tickets
+    </Button>
+  </label>
 </FormControl>
+{/* sx={{
+        justifyContent: 'flex-start',
+        fontSize: '0.75rem',
+        textTransform: 'none',
+        paddingY: 1.3,
+        paddingX: 2 ,
+        borderRadius: 1,
+        color: '#5C5C8A',
+        borderColor: '#E0E0E0',
+        backgroundColor: '#FAFAFA',
+        '&:hover': {
+          backgroundColor: '#F5F5F5',
+          borderColor: '#C4C4C4',
+        },
+        boxShadow: 'none',
+      }} */}
         </div>
       </div>
       {/* Submit */}
